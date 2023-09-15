@@ -5,8 +5,12 @@ public class Main {
         Scanner console = new Scanner(System.in);
         System.out.print("Введите математическое выражение:");
         String operation = console.nextLine();
+        System.out.println(calc(operation));
+    }
+
+    public static String calc(String operation) throws Exception {
+
         String[] numbers = new String[2];
-        numbers = operation.split("[ ,.!№;%:?()@#$^]");
         String[] roman = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX",
                 "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII", "XXVIII", "XXIX", "XXX", "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI", "XXXVII", "XXXVIII", "XXXIX", "XL",
                 "XLI", "XLII", "XLIII", "XLIV", "XLV", "XLVI", "XLVII", "XLVIII", "XLIX", "L", "LI", "LII", "LIII", "LIV", "LV", "LVI", "LVII", "LVIII", "LIX", "LX",
@@ -18,10 +22,11 @@ public class Main {
         int result = 0;
         int a = 0;
         int b = 0;
-        if (numbers.length<3) {
+        numbers = operation.split("[ ,.!№;%:?()@#$^]");
+        if (numbers.length < 3) {
             throw new Exception("Не является математическим выражением");
         }
-        if (numbers.length>3) {
+        if (numbers.length > 3) {
             throw new Exception("Формат математической операции не удовлетворяет заданию - два операнда должны быть целыми числами и один оператор + - * /");
         }
         try {
@@ -30,7 +35,6 @@ public class Main {
             }
         } catch (NumberFormatException e) {
         }
-
         if (numbers[1].equals("+")) {
 
             for (int i = 0; i < arab.length - 1; i++) {
@@ -38,10 +42,10 @@ public class Main {
                     a = Integer.parseInt(numbers[0]);
                     b = Integer.parseInt(numbers[2]);
                     result = a + b;
-                    System.out.println(result);
+                    return String.valueOf(result);
                 }
             }
-            for (int i = 0; i < 9; i++) {
+            for (int i = 0; i < 10; i++) {
                 if (numbers[0].equals(roman[i])) {
                     if (numbers[0].equals("I")) {
                         a = 1;
@@ -90,7 +94,7 @@ public class Main {
                         throw new Exception("Число должно быть от I до X");
                     }
                     result = a + b;
-                    System.out.println(roman[result - 1]);
+                    return roman[result - 1];
                 }
             }
         }
@@ -103,11 +107,11 @@ public class Main {
                     a = Integer.parseInt(numbers[0]);
                     b = Integer.parseInt(numbers[2]);
                     result = a - b;
-                    System.out.println(result);
+                    return String.valueOf(result);
                 }
 
             }
-            for (int i = 0; i < 9; i++) {
+            for (int i = 0; i < 10; i++) {
                 if (numbers[0].equals(roman[i])) {
                     if (numbers[0].equals("I")) {
                         a = 1;
@@ -156,7 +160,7 @@ public class Main {
                         throw new Exception("Число должно быть от I до X");
                     }
                     result = a - b;
-                    System.out.println(roman[result - 1]);
+                    return roman[result - 1];
                 }
             }
         }
@@ -169,11 +173,11 @@ public class Main {
                     a = Integer.parseInt(numbers[0]);
                     b = Integer.parseInt(numbers[2]);
                     result = a * b;
-                    System.out.println(result);
+                    return String.valueOf(result);
                 }
 
             }
-            for (int i = 0; i < 9; i++) {
+            for (int i = 0; i < 10; i++) {
                 if (numbers[0].equals(roman[i])) {
                     if (numbers[0].equals("I")) {
                         a = 1;
@@ -222,7 +226,7 @@ public class Main {
                         throw new Exception("Число должно быть от I до X");
                     }
                     result = a * b;
-                    System.out.println(roman[result - 1]);
+                    return roman[result - 1];
                 }
             }
         }
@@ -235,11 +239,11 @@ public class Main {
                     a = Integer.parseInt(numbers[0]);
                     b = Integer.parseInt(numbers[2]);
                     result = a / b;
-                    System.out.println(result);
+                    return String.valueOf(result);
                 }
 
             }
-            for (int i = 0; i < 9; i++) {
+            for (int i = 0; i < 10; i++) {
                 if (numbers[0].equals(roman[i])) {
                     if (numbers[0].equals("I")) {
                         a = 1;
@@ -288,9 +292,11 @@ public class Main {
                         throw new Exception("Число должно быть от I до X");
                     }
                     result = a / b;
-                    System.out.println(roman[result - 1]);
+                    return roman[result - 1];
                 }
             }
         }
+        return operation;
     }
+
 }
